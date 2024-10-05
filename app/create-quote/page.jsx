@@ -9,6 +9,7 @@ import Form from "@components/Form";
 const CreateQuote = () => {
   const [submitting, setSubmitting] = useState(false);
   const router = useRouter();
+  const { data: session } = useSession();
   const [post, setPost] = useState({
     quote: "",
     tag: "",
@@ -23,7 +24,7 @@ const CreateQuote = () => {
         body: JSON.stringify({
           quote: post.quote,
           userId: session?.user.id,
-          tage: post.tag,
+          tag: post.tag,
         }),
       });
       if (res.ok) {

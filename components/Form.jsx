@@ -32,8 +32,9 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           </span>
         </label>
         <input
+          type="text"
           value={post.tag}
-          onChange={(e) => setPost({ ...post, tags: e.target.value })}
+          onChange={(e) => setPost({ ...post, tag: e.target.value })}
           placeholder="#tag"
           required
           className="form_input"
@@ -42,9 +43,13 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           <Link href="/" className="text-gray-500 text-sm">
             Cancel
           </Link>
-          <buttom className="px-5 py-1.5 text-sm bg-primary-blue rounded-full text-white cursor-pointer" type="submit" disabled={submitting}>
+          <button
+            className="px-5 py-1.5 text-sm bg-primary-blue rounded-full text-white cursor-pointer"
+            type="submit"
+            disabled={submitting}
+          >
             {submitting ? `${type}...` : type}
-          </buttom>
+          </button>
         </div>
       </form>
     </section>
