@@ -47,15 +47,15 @@
   max-width: 640px;
   background-image: radial-gradient(
       at 27% 37%,
-      hsla(215, 98%, 61%, 1) 0px,
+      hsla(210, 98%, 61%, 1) 0px, /* Vibrant blue */
       transparent 0%
     ),
-    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
-    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
-    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
-    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
-    radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
-    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
+    radial-gradient(at 97% 21%, hsla(195, 98%, 72%, 1) 0px, transparent 50%), /* Light cyan */
+    radial-gradient(at 52% 99%, hsla(220, 98%, 61%, 1) 0px, transparent 50%), /* Indigo blue */
+    radial-gradient(at 10% 29%, hsla(240, 96%, 67%, 1) 0px, transparent 50%), /* Deeper blue */
+    radial-gradient(at 97% 96%, hsla(180, 60%, 74%, 1) 0px, transparent 50%), /* Teal */
+    radial-gradient(at 33% 50%, hsla(200, 67%, 73%, 1) 0px, transparent 50%), /* Sky blue */
+    radial-gradient(at 79% 53%, hsla(230, 68%, 79%, 1) 0px, transparent 50%); /* Cool violet */
   position: absolute;
   content: "";
   width: 100%;
@@ -96,7 +96,9 @@
 .green_gradient {
   @apply bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent;
 }
-
+.blue_gradient_two {
+  @apply bg-gradient-to-r from-blue-500 via-indigo-600 to-cyan-500 bg-clip-text text-transparent;
+}
 .blue_gradient {
   @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
 }
