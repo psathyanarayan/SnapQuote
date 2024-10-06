@@ -8,6 +8,7 @@ import Profile from "@components/Profile";
 const MyProfile = () => {
   const [dataByProfile, setDataByProfile] = useState([]);
   const { data: session } = useSession();
+  const router = useRouter();
   useEffect(() => {
     const fetchDataByProfile = async () => {
       const res = await fetch(`/api/users/${session?.user.id}/quotes`, {
@@ -20,8 +21,10 @@ const MyProfile = () => {
       fetchDataByProfile();
     }
   }, [session?.user.id]);
-  const handleEdit = () => {};
-  const handleDelete = async () => {};
+  const handleEdit = (quote) => {
+    router.push(`/update-quote?id=${quote._id}`);
+  };
+  const handleDelete = async (quote) => {};
   return (
     <Profile
       name="My"
