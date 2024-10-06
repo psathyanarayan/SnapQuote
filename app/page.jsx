@@ -2,14 +2,16 @@
 
 import Feed from "@components/Feed";
 import { useState, useEffect, useRef } from "react";
+
 const Home = () => {
   const [text, setText] = useState("");
   const fullText = "Share Your Boldest Quotes";
   const indexRef = useRef(0);
+
   useEffect(() => {
     const typeWriter = () => {
       if (indexRef.current < fullText.length) {
-        setText((prevText) => prevText + fullText.charAt(indexRef.current));
+        setText(fullText.substring(0, indexRef.current + 1)); // Set text directly with substring
         indexRef.current += 1;
       } else {
         clearInterval(intervalId);
@@ -23,7 +25,6 @@ const Home = () => {
 
   return (
     <section className="w-full flex-center flex-col">
-      {/* Underscre means styles from global css  */}
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 md:mb-6 lg:mb-8">
         <span className="block mb-2 md:mb-4">Unleash Words</span>
         <span className="typewriter_text blue_gradient_two inline-block">
