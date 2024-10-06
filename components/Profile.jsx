@@ -1,5 +1,12 @@
 import QuoteCard from "./QuoteCard";
-const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
+const Profile = ({
+  noClick,
+  name,
+  desc,
+  data,
+  handleEdit,
+  handleDelete,
+}) => {
   return (
     <section className="w-full">
       <h1 className="head_text text-left">
@@ -11,6 +18,7 @@ const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
           <QuoteCard
             key={quote._id}
             quote={quote}
+            noClick={noClick}
             handleEdit={() => handleEdit && handleEdit(quote)}
             handleDelete={() => handleDelete && handleDelete(quote)}
           />

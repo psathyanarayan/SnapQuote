@@ -5,7 +5,13 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-const QuoteCard = ({ quote, handleTagClick, handleEdit, handleDelete }) => {
+const QuoteCard = ({
+  noClick,
+  quote,
+  handleTagClick,
+  handleEdit,
+  handleDelete,
+}) => {
   const [copy, setCopy] = useState("");
   const { data: session } = useSession();
   const pathName = usePathname();
@@ -26,7 +32,15 @@ const QuoteCard = ({ quote, handleTagClick, handleEdit, handleDelete }) => {
             height={40}
             className="rounded-full object-contain"
           />
-          <div className="flex flex-col">
+          <div
+            className="flex flex-col"
+            onClick={() =>
+              !noClick &&
+              router.push(
+                `profile/${quote.creator._id}?name=${quote.creator.username}`
+              )
+            }
+          >
             <h3 className="font-satoshi font-semibold text-gray-900">
               {quote.creator.username}
             </h3>
