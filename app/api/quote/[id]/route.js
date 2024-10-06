@@ -17,7 +17,7 @@ export const GET = async (req, { params }) => {
   }
 };
 
-export const PATCH = async (req, {params}) => {
+export const PATCH = async (req, { params }) => {
   const { quote, tag } = await req.json();
   try {
     await connectToDB();
@@ -37,9 +37,11 @@ export const PATCH = async (req, {params}) => {
 export const DELETE = async (req, { params }) => {
   try {
     await connectToDB();
-    await Quote.findByIdAndDelete({ creator: params.id });
+    await Quote.findByIdAndDelete(params.id);
     return new Response({ message: "Deleted successfully" }, { status: 201 });
   } catch (error) {
-    return new Response(JSON.stringify(error?.message), { status: 500 });
+    return new Response(JSON.stringify({ message: error?.message }), {
+      status: 500,
+    });
   }
 };

@@ -24,7 +24,22 @@ const MyProfile = () => {
   const handleEdit = (quote) => {
     router.push(`/update-quote?id=${quote._id}`);
   };
-  const handleDelete = async (quote) => {};
+  const handleDelete = async (quote) => {
+    const hasConfirmed = confirm("Are you sure you want to delete ?");
+    if (hasConfirmed) {
+      try {
+        const updatedData = await fetch(`api/quote/${quote._id}`, {
+          method: "DELETE",
+        });
+        const filteredQuotes = dataByProfile.filter(
+          (post) => post._id !== quote._id
+        );
+        setDataByProfile(filteredQuotes);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   return (
     <Profile
       name="My"
