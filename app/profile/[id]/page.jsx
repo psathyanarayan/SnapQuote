@@ -31,7 +31,7 @@ const OtherProfile = ({ params }) => {
     const hasConfirmed = confirm("Are you sure you want to delete ?");
     if (hasConfirmed) {
       try {
-        const updatedData = await fetch(`api/quote/${quote._id}`, {
+        const updatedData = await fetch(`/api/quote/${quote._id}`, {
           method: "DELETE",
         });
         const filteredQuotes = dataByProfile.filter(
