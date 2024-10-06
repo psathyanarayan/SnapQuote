@@ -47,7 +47,7 @@ const QuoteCard = ({ quote, handleTagClick, handleEdit, handleDelete }) => {
       <p className="my-4 font-satoshi text-gray-700 text-sm">{quote.quote}</p>
       <p
         className="font-inter text-sm blue_gradient cursor-pointer"
-        onClick={handleTagClick(quote.tag)}
+        onClick={() => handleTagClick && handleTagClick(quote.tag)}
       >
         #{quote.tag}
       </p>

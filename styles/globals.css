@@ -64,7 +64,18 @@
   top: 80px;
   opacity: 0.15;
 }
+@keyframes blink {
+  50% { border-color: transparent; }
+  100% { border-color: black; }
+}
 
+.typewriter_text {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 2px solid black;
+  white-space: nowrap;
+  animation: blink 0.75s step-end infinite;
+}
 @media screen and (max-width: 640px) {
   .main {
     padding: 0;
