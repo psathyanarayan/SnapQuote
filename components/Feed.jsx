@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import QuoteCard from "./QuoteCard";
-
+import { useRouter } from "next/navigation";
 const QuoteCardList = ({ data, handleTagClick }) => {
   return (
     <div className="mt-16 prompt_layout">
@@ -19,6 +19,8 @@ const QuoteCardList = ({ data, handleTagClick }) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [quote, setQuote] = useState([]);
+  const route = useRouter();
+
   const handleSearchChange = (e) => {};
   useEffect(() => {
     const fetchQuotes = async () => {
@@ -40,7 +42,10 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      <QuoteCardList data={quote} handleTagClick={() => {}} />
+      <QuoteCardList
+        data={quote}
+        handleTagClick={(tag) => route.push(`/tag/${tag}`)}
+      />
     </section>
   );
 };
