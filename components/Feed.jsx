@@ -3,49 +3,78 @@
 import { useState, useEffect } from "react";
 import QuoteCard from "./QuoteCard";
 import { useRouter } from "next/navigation";
+
 const QuoteCardList = ({ data, handleTagClick }) => {
+  console.log("QuoteCardList data:", data); // Log data to check
+
   return (
     <div className="mt-16 prompt_layout">
-      {data.map((quote) => (
-        <QuoteCard
-          key={quote._id}
-          quote={quote}
-          handleTagClick={handleTagClick}
-        />
-      ))}
+      {data.length > 0 ? (
+        data.map((quote) => (
+          <QuoteCard
+            key={quote._id}
+            quote={quote}
+            handleTagClick={handleTagClick}
+          />
+        ))
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
+
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [quote, setQuote] = useState([]);
+  const [loading, setLoading] = useState(false);
   const route = useRouter();
 
-  const handleSearchChange = (e) => {};
+  // Debounced search function
   useEffect(() => {
     const fetchQuotes = async () => {
-      const res = await fetch("/api/quote");
+      setLoading(true);
+      let res;
+      if (searchText.length > 0) {
+        res = await fetch(`/api/quote/search/${searchText}`);
+      } else {
+        res = await fetch("/api/quote");
+      }
+
       const data = await res.json();
       setQuote(data);
+      setLoading(false);
     };
-    fetchQuotes();
-  }, []);
+
+    const debounceFetch = setTimeout(() => {
+      fetchQuotes();
+    }, 500); // 500ms debounce time
+
+    return () => clearTimeout(debounceFetch); // Cleanup debounce on unmount or value change
+  }, [searchText]);
+  useEffect(() => {
+    console.log("hii", quote);
+  }, [quote]);
   return (
     <section className="feed">
       <form className="relative flex-center w-full">
         <input
           type="text"
-          placeholder="Search for a tag or username"
+          placeholder="Search for a tag, username, or quote"
           value={searchText}
-          onChange={handleSearchChange}
+          onChange={(e) => setSearchText(e.target.value)}
           required
           className="search_input peer"
         />
       </form>
-      <QuoteCardList
-        data={quote}
-        handleTagClick={(tag) => route.push(`/tag/${tag}`)}
-      />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <QuoteCardList
+          data={quote}
+          handleTagClick={(tag) => route.push(`/tag/${tag}`)}
+        />
+      )}
     </section>
   );
 };
