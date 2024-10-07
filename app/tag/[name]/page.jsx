@@ -37,7 +37,7 @@ const TagData = ({ params }) => {
       </h1>
       <p className="desc text-left">All {params.name} tag data</p>
       <div className="mt-10 prompt_layout">
-        {tagData.map((quote) => (
+        {tagData?.map((quote) => (
           <QuoteCard
             key={quote._id}
             quote={quote}

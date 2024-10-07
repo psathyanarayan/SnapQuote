@@ -14,7 +14,7 @@ const Profile = ({
       </h1>
       <p className="desc text-left">{desc}</p>
       <div className="mt-10 prompt_layout">
-        {data.map((quote) => (
+        {data?.map((quote) => (
           <QuoteCard
             key={quote._id}
             quote={quote}

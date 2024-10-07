@@ -51,7 +51,7 @@ const Nav = () => {
           ) : (
             <>
               {providers &&
-                Object.values(providers).map((prov) => (
+                Object.values(providers)?.map((prov) => (
                   <button
                     className="black_btn"
                     type="button"
@@ -82,7 +82,7 @@ const Nav = () => {
           ) : (
             <>
               {providers &&
-                Object.values(providers).map((prov) => (
+                Object.values(providers)?.map((prov) => (
                   <button
                     className="black_btn"
                     type="button"
