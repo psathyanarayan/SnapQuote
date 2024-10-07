@@ -1,5 +1,6 @@
 import { connectToDB } from "@utils/database";
 import Quote from "@models/quote";
+export const revalidate = 0;
 export const GET = async (req, res) => {
 
 
