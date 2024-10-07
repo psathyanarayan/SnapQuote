@@ -5,7 +5,6 @@ import QuoteCard from "./QuoteCard";
 import { useRouter } from "next/navigation";
 
 const QuoteCardList = ({ data, handleTagClick }) => {
-  console.log("QuoteCardList data:", data); // Log data to check
 
   return (
     <div className="mt-16 prompt_layout">
@@ -52,9 +51,6 @@ const Feed = () => {
 
     return () => clearTimeout(debounceFetch); // Cleanup debounce on unmount or value change
   }, [searchText]);
-  useEffect(() => {
-    console.log("hii", quote);
-  }, [quote]);
   return (
     <section className="feed">
       <form className="relative flex-center w-full">
