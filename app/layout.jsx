@@ -2,6 +2,7 @@ import "@styles/globals.css";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import ErrorBoundary from "@components/ErrorBoundary";
+import ErrorPage from "@components/ErrorPage";
 export const metadata = {
   title: "SnapQuote",
   description: "Unleash and Share",
@@ -10,7 +11,7 @@ export const metadata = {
 const RootLayout = ({ children }) => (
   <html lang="en">
     <body>
-      <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      <ErrorBoundary fallback={<ErrorPage />}>
         <Provider>
           <div className="main">
             <div className="gradient" />
