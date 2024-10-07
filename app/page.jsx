@@ -27,8 +27,12 @@ const Home = () => {
     <section className="w-full flex-center flex-col">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 md:mb-6 lg:mb-8">
         <span className="block mb-2 md:mb-4">Unleash Words</span>
-        <span className="typewriter_text blue_gradient_two inline-block">
-          {text}
+        <span
+          className="typewriter_text blue_gradient_two inline-block 
+                 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl
+                 font-bold leading-tight text-center"
+        >
+          Share Your Boldest Quotes
         </span>
       </h1>
        
