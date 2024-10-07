@@ -1,32 +1,38 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
 
 const UpdateQuote = () => {
-  const [submitting, setSubmitting] = useState(false);
   const router = useRouter();
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <UpdateQuoteContent router={router} />
+    </Suspense>
+  );
+};
+
+const UpdateQuoteContent = ({ router }) => {
+  const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({ quote: "", tag: "" });
   const searchParams = useSearchParams();
   const quoteId = searchParams.get("id");
+
   useEffect(() => {
     const fetchDataForEdit = async () => {
       const fetchData = await fetch(`api/quote/${quoteId}`, {
         method: "GET",
       });
       const data = await fetchData.json();
-      console.log("fetchData", data, { quote: data.quote, tag: data.tag });
       setPost({ quote: data.quote, tag: data.tag });
     };
     if (quoteId) {
       fetchDataForEdit();
     }
   }, [quoteId]);
-  useEffect(() => {
-    console.log(post);
-  }, [post]);
+
   const updateQuote = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -47,6 +53,7 @@ const UpdateQuote = () => {
       setSubmitting(false);
     }
   };
+
   return (
     <Form
       type="Edit"

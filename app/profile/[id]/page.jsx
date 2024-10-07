@@ -1,17 +1,28 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Profile from "@components/Profile";
+
 const OtherProfile = ({ params }) => {
   const [dataByProfile, setDataByProfile] = useState([]);
   const { data: session } = useSession();
   const router = useRouter();
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProfileContent session={session} params={params} router={router} />
+    </Suspense>
+  );
+};
+
+const ProfileContent = ({ session, params, router }) => {
+  const [dataByProfile, setDataByProfile] = useState([]);
   const searchParams = useSearchParams();
   const userName = searchParams.get("name");
-  console.log("p", params.id);
+
   useEffect(() => {
     const fetchDataByProfile = async () => {
       const res = await fetch(`/api/users/${params.id}/quotes`, {
@@ -24,11 +35,13 @@ const OtherProfile = ({ params }) => {
       fetchDataByProfile();
     }
   }, [session?.user.id]);
+
   const handleEdit = (quote) => {
     router.push(`/update-quote?id=${quote._id}`);
   };
+
   const handleDelete = async (quote) => {
-    const hasConfirmed = confirm("Are you sure you want to delete ?");
+    const hasConfirmed = confirm("Are you sure you want to delete?");
     if (hasConfirmed) {
       try {
         const updatedData = await fetch(`/api/quote/${quote._id}`, {
@@ -43,6 +56,7 @@ const OtherProfile = ({ params }) => {
       }
     }
   };
+
   return (
     <>
       {session?.user.id === params.id ? (
