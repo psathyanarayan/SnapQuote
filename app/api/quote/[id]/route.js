@@ -4,14 +4,20 @@ export const revalidate = 0;
 export const GET = async (req, { params }) => {
   try {
     await connectToDB();
-    const quoteDataByUserId = await Quote.findById(params.id).populate(
-      "creator"
-    );
+
+    if (!params.id) {
+      return new Response("Invalid request: ID is required", { status: 400 });
+    }
+
+    const quoteDataByUserId = await Quote.findById(params.id).populate("creator");
+
     if (!quoteDataByUserId) {
       return new Response("Quote not found", { status: 404 });
     }
+
     return new Response(JSON.stringify(quoteDataByUserId), { status: 200 });
   } catch (error) {
+    console.error("Error fetching quote:", error);  // Added logging for error details
     return new Response(JSON.stringify({ message: error?.message }), {
       status: 500,
     });
