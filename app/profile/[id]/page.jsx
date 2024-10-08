@@ -31,9 +31,10 @@ const ProfileContent = ({ session, params, router }) => {
       const data = await res.json();
       setDataByProfile(data);
     };
-    if (session?.user.id) {
-      fetchDataByProfile();
-    }
+    fetchDataByProfile();
+    // if (session?.user.id) {
+    // }
+    
   }, [session?.user.id]);
 
   const handleEdit = (quote) => {
