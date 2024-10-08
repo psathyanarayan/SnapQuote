@@ -104,7 +104,7 @@ const Nav = () => {
                 Profile
               </Link>
               <Link
-                href="/profile"
+                href="/create-quote"
                 className="dropdown_link"
                 onClick={() => setToggleDropdown(false)}
               >
